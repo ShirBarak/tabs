@@ -1,11 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
-import CoolTabs from './CoolTabs';
+import { useEffect, useState } from 'react';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { Button } from '@mui/material';
 
 function App() {
+  const methods = useForm();
+  const [show, setShow] = useState(true);
+  useEffect(() => console.log(methods.watch())
+  )
+
   return (
     <div className="App">
-      <CoolTabs />
+      <FormProvider {...methods}>
+        {show && <Controller name='a' render={({ field, fieldState }) => <input {...field}></input>} />}
+        <Button variant='contained' onClick={() => setShow(p => !p)}></Button>
+      </FormProvider>
     </div>
   );
 }
